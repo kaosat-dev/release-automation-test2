@@ -1,0 +1,27 @@
+{
+  "name": "release-automation-test",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js",
+    "build-docs": "./node_modules/.bin/jsdoc -c jsdoc.json",
+    "__preversion": "npm test",
+    "__version": "git add -A ",
+    "__postversion": "git push origin master && git push origin master --tags",
+    "__release-patch": "git checkout master; git pull origin master; npm version patch",
+    "release-dry-run": "npm run release -- --dry-run",
+    "release": "git add -A && standard-version"
+  },
+  "author": "Mark 'kaosat-dev' Moissette",
+  "license": "MIT",
+  "devDependencies": {
+    "standard-version": "^4.2.0",
+    "tape": "^4.8.0"
+  },
+  "standard-version": {
+    "scripts": {
+      "prebump": "npm test"
+    }
+  }
+}
